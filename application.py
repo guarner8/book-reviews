@@ -39,7 +39,7 @@ def index():
 def book(isbn):
     if session.get("username") == None:
         return redirect(url_for('login'))
-    res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "FftWe8lZeHrsgiwNllJWfg", "isbns": isbn})
+    res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "", "isbns": isbn})
     book_api = res.json()
     book = db.execute("SELECT * FROM books WHERE isbn=:isbn", {"isbn":isbn}).fetchone()
     reviews = db.execute("SELECT * FROM reviews, users WHERE book_id=:book_id", {"book_id":book.id}).fetchall()
