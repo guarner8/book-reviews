@@ -132,7 +132,9 @@ def review(isbn):
             error="Plese input both rating and review!"
         else:
             error="You cannot add two reviews for the same book!"
-        res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "FftWe8lZeHrsgiwNllJWfg", "isbns": isbn})
+
+        # Plug in your api key here!
+        res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "", "isbns": isbn})
         book_api = res.json()
         reviews = db.execute("SELECT * FROM reviews, users WHERE book_id=:book_id", {"book_id":book.id}).fetchall()
         return render_template('/book.html', error=error, book=book, reviews=reviews, book_api=book_api, user=session["username"])
